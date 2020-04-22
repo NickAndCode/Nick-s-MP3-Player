@@ -9,4 +9,3 @@ There has been some improvements from my last application but this applications 
 I've added a progress bar to give a progress of the file while playing and also a timer to show minutes and seconds of the file and total time of file.
 I've notice that there are times when my applicaiotn would crash and I'm currently working on that issue.
 WARNING! I am still working on this application, If you try to run it, it may crash.
-Thank You.
