@@ -24,9 +24,8 @@ namespace NicksMediaPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        
-
         private MediaPlayer player = new MediaPlayer();
+        
         private TimeSpan position;
 
         public MainWindow()
