@@ -1,0 +1,24 @@
+<Window x:Name="NicksMediaPlayer" x:Class="NicksMediaPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NicksMediaPlayer"
+        Title="Nick's Media Player" Height="200" Width="500" WindowStyle="None">
+    <Grid ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <Label x:Name="MyLabel" Content="Nick's Media Player" HorizontalAlignment="Left" Margin="110,0,0,0" VerticalAlignment="Top" Width="275" FontFamily="Verdana" FontSize="24" FontWeight="Bold"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" VerticalAlignment="Top" Width="356" FontFamily="Verdana" TextAlignment="Center" BorderBrush="Black" SelectionBrush="#FF929292"/>
+        <Button x:Name="openFileButton" Content="Open File" HorizontalAlignment="Right" Margin="0,41,9.556,0" VerticalAlignment="Top" Width="80" Click="OpenFileButton" Height="23" FontFamily="Verdana" Background="#FF4A4A4A" Foreground="White" BorderBrush="Black"/>
+        <ProgressBar x:Name="progressBar" HorizontalAlignment="Left" Height="10" Margin="10,82,0,0" VerticalAlignment="Top" Width="356" BorderBrush="Black" Background="White" OpacityMask="Black" Foreground="#FF3C2652"/>
+        <Button x:Name="timerButton" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="395,77,0,0" Foreground="White" BorderBrush="Black" Background="#FF4A4A4A"/>
+        <Button x:Name="loadButton" Content="Load" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" Width="80" Click="LoadButton" FontFamily="Verdana" Background="#FF4A4A4A" BorderBrush="Black" Foreground="White"/>
+        <Button x:Name="playButton" Content="Play" HorizontalAlignment="Left" Margin="110,113,0,0" VerticalAlignment="Top" Width="80" Click="PlayButton" FontFamily="Verdana" Background="#FF4A4A4A" BorderBrush="Black" Foreground="White"/>
+        <Button x:Name="pauseButton" Content="Pause" HorizontalAlignment="Left" Margin="207,113,0,0" VerticalAlignment="Top" Width="80" Click="PauseButton" FontFamily="Verdana" Background="#FF4A4A4A" BorderBrush="Black" Foreground="White"/>
+        <Button x:Name="playLoopButton" Content="Repeat" HorizontalAlignment="Left" Margin="305,113,0,0" VerticalAlignment="Top" Width="80" Click="PlayLoopButton" FontFamily="Verdana" Background="#FF4A4A4A" BorderBrush="Black" Foreground="White"/>
+        <Button x:Name="stopButton" Content="Stop" HorizontalAlignment="Right" Margin="0,113,9.556,0" VerticalAlignment="Top" Width="80" Click="StopButton" FontFamily="Verdana" Foreground="White" Background="#FF4A4A4A" BorderBrush="Black"/>
+        <StatusBar x:Name="statusBar" HorizontalAlignment="Left" Height="21" Margin="0,0,-0.445,-0.111" VerticalAlignment="Bottom" Width="496" FontFamily="Verdana" Background="Black" Foreground="White">
+            Welcome, Please Click The Open File Button.
+        </StatusBar>
+        <Button x:Name="exitButton" Content="Exit" HorizontalAlignment="Left" Margin="207,143,0,0" VerticalAlignment="Top" Width="80" Background="#FF4A4A4A" Foreground="White" BorderBrush="Black" Click="ExitButton" FontFamily="Verdana"/>
+    </Grid>
+</Window>
