@@ -7,5 +7,5 @@ Once user is finished, user can click the Stop button to stop the file or Exit b
 This is my second project from what I've learned about C# and XAML.
 There has been some improvements from my last application but this applications still needs improvements.
 I've added a progress bar to give a progress of the file while playing and also a timer to show minutes and seconds of the file and total time of file.
-I've notice that there are times when my applicaiotn would crash and I'm currently working on that issue.
-WARNING! I am still working on this application, If you try to run it, it may crash.
+I was able to fix application from crashing by adding the HasTimeSpan property so that I can use TimeSpan for the timer and progress bar.
+Application runs perfectly fine now.
