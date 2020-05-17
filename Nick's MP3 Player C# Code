@@ -11,11 +11,13 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Microsoft.Win32;
+
 
 namespace NicksMediaPlayer
 {
@@ -25,16 +27,14 @@ namespace NicksMediaPlayer
     public partial class MainWindow : Window
     {
         private MediaPlayer player = new MediaPlayer();
-        
-        private TimeSpan position;
 
         public MainWindow()
         {
             InitializeComponent();
             EnablePlayback(false);
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer;
+            timer.Tick += TotalTime;
             timer.Tick += Progress;
             timer.Start();
         }
@@ -57,6 +57,7 @@ namespace NicksMediaPlayer
             
             if (file.ShowDialog() == true)
             {
+                EnablePlayback(true);
                 textBox.Text = file.FileName;
                 player.Open(new Uri(file.FileName));
                 string message = string.Format($"Selected File: {file.FileName}");
@@ -64,37 +65,34 @@ namespace NicksMediaPlayer
             }
         }
 
-        void Timer(object sender, EventArgs e)
+        private void Timer(object sender, EventArgs e)
         {
             if (player.Source != null)
-                timerButton.Content = String.Format($"{player.Position.ToString(@"mm\:ss")} / {player.NaturalDuration.TimeSpan.ToString(@"mm\:ss")}");
-            else
-                timerButton.Content = DateTime.Now.ToShortDateString();
+            {
+                timerButton.Content = player.Position.ToString(@"mm\:ss");
+            }
+        }
+
+        private void TotalTime(object sender, EventArgs e)
+        {
+            if (player.Source != null)
+            {
+                if (player.NaturalDuration.HasTimeSpan)
+                {
+                    totalTime.Content = player.NaturalDuration.TimeSpan.ToString(@"mm\:ss");
+                }
+            }
         }
 
         private void Progress(object sender, EventArgs e)
         {
             if (player.Source != null)
             {
-                position = player.NaturalDuration.TimeSpan;
-                progressBar.Maximum = position.TotalSeconds;
-                progressBar.Value = player.Position.TotalSeconds;
-            }
-            else
-                progressBar.Minimum = 0;
-        }
-
-        private void LoadButton(object sender, RoutedEventArgs e)//
-        {
-            EnablePlayback(true);
-            try
-            {
-                string message = string.Format("Ready When You Are!");
-                MessageBar(message);
-            }
-            catch (Exception exception)
-            {
-                MessageBar(exception.Message);
+                if (player.NaturalDuration.HasTimeSpan)
+                {
+                    progressBar.Value = player.Position.TotalSeconds;
+                    progressBar.Maximum = player.NaturalDuration.TimeSpan.TotalSeconds;
+                }
             }
         }
 
@@ -104,11 +102,20 @@ namespace NicksMediaPlayer
             MessageBar("Playing");
         }
 
+        private void PlayLoopButton(object sender, RoutedEventArgs e)
+        {
+            {
+                player.MediaEnded += new EventHandler(Media_Ended);
+                player.Play();
+                MessageBar("Play On Repeat");
+                return;
+            }
+        }
 
-        private void PlayLoopButton(object sender, RoutedEventArgs e)//
-        {    
+        private void Media_Ended(object sender, EventArgs e)
+        {
+            player.Position = TimeSpan.Zero;
             player.Play();
-            MessageBar("Play On Repeat");
         }
 
         private void PauseButton(object sender, RoutedEventArgs e)
@@ -133,6 +140,7 @@ namespace NicksMediaPlayer
 
         private void ExitButton(object sender, RoutedEventArgs e)
         {
+            player.Close();
             Application.Current.Shutdown();
         }
     }
